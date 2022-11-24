@@ -1,0 +1,57 @@
+server:
+  port: 8090 # 后期该微服务多实例，端⼝从8080递增（10个以内）
+Spring:
+  application:
+    name: lagou-service-resume
+  cloud:
+    # config客户端配置,和ConfigServer通信,并告知ConfigServer希望获取的配置信息在哪个文件中
+    config:
+      name: lagou-service-resume  #配置文件名称
+      profile: test  #后缀名称
+      label: master  #分支名称
+      uri: http://localhost:9006 #ConfigServer配置中心地址
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/spring_cloud?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+# MyBatisPlus配置
+mybatis-plus:
+  # 搜索指定包别名
+  #typeAliasesPackage: com.lagou.**.pojo
+  configuration:
+    map-underscore-to-camel-case: false
+#注册到Eureka服务中心
+eureka:
+  client:
+    #每隔多久拉取一次服务列表
+    registry-fetch-interval-seconds: 30
+    service-url:
+      #注册到集群，就把多个Eurekaserver地址使用逗号连接起来即可；注册到单实例（非集群模式）,那就写一个就ok
+      defaultZone: http://LagouCloudEurekaServerA:8761/eureka,http://LagouCloudEurekaServerB:8762/eureka,http://LagouCloudEurekaServerC:8763/eureka
+  instance:
+    prefer-ip-address: true #服务实例中显示ip，而不是显示主机名（兼容老的eureka版本）
+    #自定义实例显示格式，加上版本号，便于多版本管理，注意是ip-address, 早期版本是ipAddress
+      instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}:@project.version@
+    #自定义元数据 (key-value)
+    metadata-map:
+      # ⾃定义元数据(kv⾃定义)
+      cluster: cl1
+      region: rn1
+
+#手动刷新git远程配置文件，需要配置暴露通信断电
+management:
+  endpoints:
+    web:
+      exposure:
+        #也可以暴露所有的端点 *
+        include: "*"
+
+
+
+

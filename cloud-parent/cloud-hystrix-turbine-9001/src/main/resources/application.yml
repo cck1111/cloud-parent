@@ -1,0 +1,21 @@
+server:
+  port: 9001
+spring:
+  application:
+    name: lagou-cloud-hystrix-turbine
+eureka:
+  client:
+    service-url:
+      #注册到集群，就把多个Eurekaserver地址使用逗号连接起来即可；注册到单实例（非集群模式）,那就写一个就ok
+      defaultZone: http://LagouCloudEurekaServerA:8761/eureka,http://LagouCloudEurekaServerB:8762/eureka
+    instance:
+      prefer-ip-address: true #服务实例中显示ip，而不是显示主机名（兼容老的eureka版本）
+      #自定义实例显示格式，加上版本号，便于多版本管理，注意是ip-address, 早期版本是ipAddress
+      instance-id: ${spring-cloud.client.ip-address}:${spring.application.name}:${server.port}:@project.version@
+#turbine配置
+turbine:
+  # appConfig 配置需要聚合的服务名称，比如这里聚合自动投递微服务的hystrix监控数据
+  # 如果要聚合多个微服务的监控数据，那么可以使用英文逗号拼接，比如 a,b,c
+  appConfig: lagou-service-autodeliver
+  clusterNameExpression: "'default'"  #默认集群名称
+

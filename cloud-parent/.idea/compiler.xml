@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="cloud-config" />
+        <module name="cloud-eureka-server8762" />
+        <module name="cloud-eureka-server8763" />
+        <module name="cloud-hystrix-dashboard-9000" />
+        <module name="cloud-service-resume8091" />
+        <module name="cloud-service-autodeliver8071" />
+        <module name="cloud-service-autodeliver8072" />
+        <module name="cloud-gateway-server9002" />
+        <module name="cloud-hystrix-turbine-9001" />
+        <module name="cloud-service-resume" />
+        <module name="cloud-stream-consumer-9092" />
+        <module name="cloud-eureka-server" />
+        <module name="cloud-stream-consumer-9091" />
+        <module name="cloud-service-autodeliver" />
+        <module name="cloud-stream-producer-9090" />
+        <module name="cloud-service-common" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="cloud-eureka-server8762 (1)" target="8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="cloud-config" options="-parameters" />
+      <module name="cloud-eureka-server" options="-parameters" />
+      <module name="cloud-eureka-server8762" options="-parameters" />
+      <module name="cloud-eureka-server8762 (1)" options="-parameters" />
+      <module name="cloud-eureka-server8763" options="-parameters" />
+      <module name="cloud-gateway-server9002" options="-parameters" />
+      <module name="cloud-getway-server9002" options="" />
+      <module name="cloud-hystrix-dashboard-9000" options="-parameters" />
+      <module name="cloud-hystrix-turbine-9001" options="-parameters" />
+      <module name="cloud-service-autodeliver" options="-parameters" />
+      <module name="cloud-service-autodeliver8071" options="-parameters" />
+      <module name="cloud-service-autodeliver8072" options="-parameters" />
+      <module name="cloud-service-common" options="-parameters" />
+      <module name="cloud-service-resume" options="-parameters" />
+      <module name="cloud-service-resume8091" options="-parameters" />
+      <module name="cloud-stream-consumer-9091" options="-parameters" />
+      <module name="cloud-stream-consumer-9092" options="-parameters" />
+      <module name="cloud-stream-producer-9090" options="-parameters" />
+    </option>
+  </component>
+</project>

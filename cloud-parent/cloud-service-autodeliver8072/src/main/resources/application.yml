@@ -1,0 +1,74 @@
+server:
+  port: 8072
+Spring:
+  application:
+    name: lagou-service-autodeliver
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/spring_cloud?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+#注册到Eureka服务中心
+eureka:
+  client:
+    service-url:
+      #注册到集群，就把多个Eurekaserver地址使用逗号连接起来即可；注册到单实例（非集群模式）,那就写一个就ok
+      defaultZone: http://LagouCloudEurekaServerA:8761/eureka,http://LagouCloudEurekaServerB:8762/eureka
+    #每隔多久拉取一次服务列表
+    registry-fetch-interval-seconds: 30
+  instance:
+    prefer-ip-address: true #服务实例中显示ip，而不是显示主机名（兼容老的eureka版本）
+    #自定义实例显示格式，加上版本号，便于多版本管理，注意是ip-address, 早期版本是ipAddress
+    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}:@project.version@
+
+#针对被调用方微服务名称，不加就是全局生效
+lagou-service-resume:
+  ribbon:
+    # 请求连接超时时间
+    ConnectTimeout: 2000
+    # 请求处理超时时间  Feign 默认的是1s, 配置了ReadTimeOut则以ReadTimeOut为准
+    ReadTimeOut: 3000
+    # 对所有操作都进行重试
+    OkToRetryOnAllOperations: true
+    # 根据如上配置，当访问到故障请求的时候，它会再尝试访问一次当前实例(次数由MaxAutoRetries配置)
+    # 如果不行，就换一个实例进行访问，如果还是不行，再换一次实例访问(更换次数由MaxAutoRetriesNextServer配置)
+    # 如果依然还是不行，返回失败信息
+    MaxAutoRetries: 0 #对当前选中实例重试次数，不包括第一次调用
+    MaxAutoRetriesNextServer: 0 #切换实例的重试次数
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule #负载策略调整 (随即策略)
+# springboot中暴露健康检查等断点接口
+management:
+  endpoint:
+    web:
+      exposure:
+        include: "*"
+    # 暴露健康接口的细节
+    health:
+      show-details: always
+#Feign配置熔断策略
+feign:
+  hystrix:
+    enabled: true
+  compression:
+    request:
+      enabled: true  #开启请求压缩
+      mime-types: text/html,application/xml,application/json  #设置压缩的数据类型，此处也是默认值
+      min-request-size: 2048 #设置触发压缩的大小下限，此处也是默认值
+    response:
+      enabled: true #开启相应压缩
+# hystrix设置
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 1500  #hystrix请求超时设置，hystrix与feign设置的最小值为准
+
+#配置log日志级别为debug
+logging:
+  level:
+    # Fegin日志只会对日志级别为debug的做出响应
+    com.lagou.edu.service.ResumeServiceFeignClient: debug

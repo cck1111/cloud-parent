@@ -1,0 +1,42 @@
+server:
+  port: 8070
+Spring:
+  application:
+    name: lagou-service-autodeliver
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/spring_cloud?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+#注册到Eureka服务中心
+eureka:
+  client:
+    service-url:
+      #注册到集群，就把多个Eurekaserver地址使用逗号连接起来即可；注册到单实例（非集群模式）,那就写一个就ok
+      defaultZone: http://LagouCloudEurekaServerA:8761/eureka,http://LagouCloudEurekaServerB:8762/eureka
+    instance:
+      prefer-ip-address: true #服务实例中显示ip，而不是显示主机名（兼容老的eureka版本）
+      #自定义实例显示格式，加上版本号，便于多版本管理，注意是ip-address, 早期版本是ipAddress
+      instance-id: ${spring-cloud.client.ip-address}:${server.port}:@project.version@
+    # 租约续约间隔时间，默认30秒
+      lease-renewal-interval-in-seconds: 30
+    #租约到期，服务时效时间，默认值90秒，服务超过90秒没有发生心跳，EurekaServer会将服务从列表中移除
+      lease-expiration-duration-in-seconds: 90
+
+#针对被调用方微服务名称，不加就是全局生效
+lagou-service-resume:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule #负载策略调整 (随即策略)
+# springboot中暴露健康检查等断点接口
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+    # 暴露健康接口的细节
+  endpoint:
+    health:
+      show-details: always
+
+#配置熔断策略
+  # 替换注解

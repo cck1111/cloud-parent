@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/../cloud-paren/cloud-gateway-server9002/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-config/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-eureka-server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-eureka-server8762/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-eureka-server8763/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-getway-server9002/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-getway-server9002/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-hystrix-dashboard-9000/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-hystrix-turbine-9001/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-service-autodeliver/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-service-autodeliver8071/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-service-autodeliver8072/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-service-common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-service-resume/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-service-resume8091/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-stream-consumer-9091/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-stream-consumer-9092/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-stream-consumer-9092/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-stream-producer-9090/src/main/java" charset="UTF-8" />
+  </component>
+</project>
